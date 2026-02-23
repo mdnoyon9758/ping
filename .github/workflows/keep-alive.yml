@@ -1,0 +1,26 @@
+name: Keep HuggingFace Spaces Alive
+
+on:
+  schedule:
+    # Runs every 15 minutes (GitHub Actions minimum reliable interval)
+    - cron: '*/15 * * * *'
+  # Allow manual trigger from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  ping-huggingface-spaces:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Ping Training Space
+        run: |
+          echo "Pinging Training Space..."
+          curl -s -L -o /dev/null -w "%{http_code}" -A "GitHub-KeepAlive-Action/1.0" https://himu1780-meridian-palace-trainer.hf.space || true
+          
+      - name: Ping Demo Space
+        run: |
+          echo "Pinging Demo Space..."
+          curl -s -L -o /dev/null -w "%{http_code}" -A "GitHub-KeepAlive-Action/1.0" https://himu1780-meridian-palace-demo.hf.space || true
+          
+      - name: Log Completion
+        run: echo "Ping complete at $(date)"
