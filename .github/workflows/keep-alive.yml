@@ -21,6 +21,12 @@ jobs:
         run: |
           echo "Pinging Demo Space..."
           curl -s -L -o /dev/null -w "%{http_code}" -A "GitHub-KeepAlive-Action/1.0" https://himu1780-meridian-palace-demo.hf.space || true
-          
+
+       - name: Ping Demo Space
+        run: |
+          echo "Pinging Demo Space..."
+          curl -s -L -o /dev/null -w "%{http_code}" -A "GitHub-KeepAlive-Action/1.0" https://huggingface.co/spaces/himu1780/ainbondhu-data-refiner || true
+
+
       - name: Log Completion
         run: echo "Ping complete at $(date)"
